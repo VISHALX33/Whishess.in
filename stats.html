@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Whishess Visit Stats</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="stats.css" />
+</head>
+<body>
+
+  <header class="st-topbar">
+    <div>
+      <h1>Visit counter</h1>
+      <p>Track opens of <a href="https://whishess.in/" style="color:#c9a96e">whishess.in</a> from anywhere</p>
+    </div>
+    <div class="st-actions">
+      <a href="crm.html" class="st-btn">CRM</a>
+      <a href="invoice.html" class="st-btn">Invoice</a>
+      <a href="index.html" class="st-btn">Website</a>
+      <button type="button" class="st-btn st-btn--gold" id="st-refresh">Refresh</button>
+    </div>
+  </header>
+
+  <main class="st-shell">
+    <div class="st-loading" id="st-loading">Loading stats…</div>
+
+    <div id="st-content" hidden>
+      <section class="st-hero">
+        <div class="st-hero-label">Total site visits (all pages)</div>
+        <div class="st-hero-value" id="st-total">0</div>
+        <p class="st-hero-sub">Each unique browser session per page counts once · includes Instagram, WhatsApp, Google &amp; direct links</p>
+      </section>
+
+      <div class="st-grid">
+        <div class="st-card">
+          <div class="st-card-label">Homepage visits</div>
+          <div class="st-card-value" id="st-homepage">0</div>
+        </div>
+        <div class="st-card">
+          <div class="st-card-label" id="st-today-label">Visits today</div>
+          <div class="st-card-value" id="st-today">0</div>
+        </div>
+        <div class="st-card">
+          <div class="st-card-label">Live site</div>
+          <div class="st-card-value" style="font-size:1.1rem;padding-top:0.5rem">
+            <a href="https://whishess.in/" style="color:#e7cf9f;text-decoration:none">whishess.in ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <section class="st-section">
+        <h2>Visits by page</h2>
+        <table class="st-table">
+          <thead><tr><th>Page</th><th>Visits</th></tr></thead>
+          <tbody id="st-pages"></tbody>
+        </table>
+      </section>
+
+      <section class="st-section">
+        <h2>Last 14 days</h2>
+        <table class="st-table">
+          <thead><tr><th>Date</th><th>Visits</th></tr></thead>
+          <tbody id="st-daily"></tbody>
+        </table>
+      </section>
+
+      <p class="st-note" id="st-updated"></p>
+
+      <p class="st-note">
+        Bookmark this private page: <strong>whishess.in/stats.html</strong> — not shown on the public site or Google.
+        Counts update when anyone opens your website from Instagram, WhatsApp, Google, or any other link.
+      </p>
+    </div>
+  </main>
+
+  <script src="stats.js" defer></script>
+</body>
+</html>

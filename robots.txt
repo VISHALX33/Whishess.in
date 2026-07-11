@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Whishess — Gift Wrapping Service Kota
+Sitemap: https://whishess.in/sitemap.xml

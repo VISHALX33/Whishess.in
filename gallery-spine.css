@@ -1,0 +1,384 @@
+/* =============================================================
+   whishess — 3D VERTICAL SPINE GALLERY
+   ============================================================= */
+
+.wf-gallery-page {
+  background: #1A1220;
+  overflow-x: hidden;
+}
+
+.wf-spine {
+  position: relative;
+  background: #1A1220;
+}
+
+/* ---- Intro ---- */
+.wf-spine-intro {
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.wf-spine-intro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(201, 169, 110, 0.1), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(150, 96, 196, 0.06), transparent 45%);
+  pointer-events: none;
+}
+
+.wf-spine-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #C9A96E;
+  margin-bottom: 1rem;
+}
+
+.wf-spine-intro h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 6.5vw, 72px);
+  font-weight: 300;
+  line-height: 1.06;
+  color: #FAFAFA;
+  max-width: 14ch;
+  margin-bottom: 1.1rem;
+}
+
+.wf-spine-intro h1 em {
+  font-style: italic;
+  color: #F2D9D0;
+}
+
+.wf-spine-lead {
+  max-width: 500px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(250, 250, 250, 0.55);
+  margin-bottom: 2.2rem;
+}
+
+.wf-spine-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201, 169, 110, 0.6);
+}
+
+.wf-spine-hint span {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, #C9A96E, transparent);
+}
+
+/* ---- Pinned 3D stage ---- */
+.wf-spine-scroll {
+  position: relative;
+}
+
+.wf-spine-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.wf-spine-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 50%, rgba(201, 169, 110, 0.06), transparent 70%),
+    #1A1220;
+  pointer-events: none;
+}
+
+.wf-spine-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.wf-spine-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #C9A96E;
+  box-shadow: 0 0 10px rgba(201, 169, 110, 0.75);
+  pointer-events: none;
+}
+
+/* ---- Gold spine (always visible) ---- */
+.wf-spine-line {
+  position: absolute;
+  left: 50%;
+  top: -5%;
+  bottom: -5%;
+  width: 2px;
+  transform: translateX(-50%);
+  z-index: 25;
+  pointer-events: none;
+}
+
+.wf-spine-line-core {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(201, 169, 110, 0.35) 8%,
+    #C9A96E 20%,
+    #E8D5A8 50%,
+    #C9A96E 80%,
+    rgba(201, 169, 110, 0.35) 92%,
+    transparent 100%
+  );
+  border-radius: 2px;
+}
+
+.wf-spine-line-glow {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 48px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 169, 110, 0.18) 35%,
+    rgba(201, 169, 110, 0.28) 50%,
+    rgba(201, 169, 110, 0.18) 65%,
+    transparent
+  );
+  filter: blur(12px);
+}
+
+.wf-spine-line-spark {
+  position: absolute;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: #E8D5A8;
+  box-shadow: 0 0 16px 4px rgba(201, 169, 110, 0.9);
+  opacity: 0.85;
+}
+
+/* ---- 3D scene ---- */
+.wf-spine-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.wf-spine-cards {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.wf-spine-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(480px, 42vw);
+  max-width: calc(100% - 2.5rem);
+  margin-left: calc(min(480px, 42vw) / -2);
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+  opacity: 1;
+}
+
+.wf-spine-card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201, 169, 110, 0.32);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 32px 70px -28px rgba(0, 0, 0, 0.85),
+    0 0 48px -12px rgba(201, 169, 110, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.4s ease;
+}
+
+.wf-spine-card-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(201, 169, 110, 0.5), transparent 42%, transparent 58%, rgba(201, 169, 110, 0.35));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.wf-spine-card:hover .wf-spine-figure img {
+  transform: scale(1.05);
+}
+
+.wf-spine-figure {
+  margin: 0;
+  height: clamp(420px, 52vh, 620px);
+  overflow: hidden;
+  position: relative;
+}
+
+.wf-spine-figure img {
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.wf-spine-figure::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(26, 18, 32, 0.88));
+  pointer-events: none;
+}
+
+.wf-spine-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.5rem 1.6rem 1.65rem;
+  z-index: 2;
+}
+
+.wf-spine-index {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(201, 169, 110, 0.85);
+  margin-bottom: 0.35rem;
+}
+
+.wf-spine-caption h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 2.8vw, 32px);
+  font-weight: 400;
+  color: #F2D9D0;
+  line-height: 1.12;
+  margin-bottom: 0.3rem;
+}
+
+.wf-spine-caption p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(250, 250, 250, 0.58);
+  max-width: 36ch;
+}
+
+/* Depth layers */
+.wf-spine-card--behind {
+  z-index: 8;
+}
+
+.wf-spine-card--left,
+.wf-spine-card--right {
+  z-index: 18;
+}
+
+.wf-spine-card--front {
+  z-index: 32;
+}
+
+/* ---- Outro ---- */
+.wf-spine-outro {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4.5rem 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.wf-spine-outro p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 300;
+  color: #FAFAFA;
+  margin-bottom: 1.4rem;
+}
+
+.wf-spine-outro p em {
+  font-style: italic;
+  color: #F2D9D0;
+}
+
+.wf-spine-outro a {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.65rem;
+  background: #C9A96E;
+  color: #1A1220;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.wf-spine-outro a:hover {
+  background: #b8965c;
+  transform: translateY(-2px);
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 860px) {
+  .wf-spine-card {
+    width: min(92vw, 400px);
+    margin-left: calc(min(92vw, 400px) / -2);
+  }
+
+  .wf-spine-scene {
+    perspective: 900px;
+  }
+
+  .wf-spine-figure {
+    height: clamp(380px, 54vh, 520px);
+  }
+
+  .wf-spine-line-glow {
+    width: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-spine-figure img {
+    transition: none;
+  }
+}

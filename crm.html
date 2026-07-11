@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Whishess CRM</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="crm.css" />
+</head>
+<body>
+
+  <header class="crm-topbar">
+    <div class="crm-topbar-brand">
+      <a href="index.html" class="crm-topbar-logo-link" aria-label="Back to Whishess website">
+        <img src="apple-touch-icon.png" alt="" class="crm-topbar-logo" width="44" height="44" />
+      </a>
+      <div>
+        <h1>whish<span>ess</span> CRM</h1>
+        <p>Advanced customer hub · <a href="index.html" class="crm-site-link">whishess.in</a></p>
+      </div>
+    </div>
+    <div class="crm-topbar-actions">
+      <a href="stats.html" class="crm-btn">Stats</a>
+      <a href="invoice.html" class="crm-btn">Invoice</a>
+      <button type="button" class="crm-btn" id="crm-export-csv">Export CSV</button>
+      <button type="button" class="crm-btn" id="crm-import">Import</button>
+      <input type="file" id="crm-import-file" accept=".json" hidden />
+      <button type="button" class="crm-btn" id="crm-export">Backup JSON</button>
+      <button type="button" class="crm-btn crm-btn--gold" id="crm-add">+ Add customer</button>
+    </div>
+  </header>
+
+  <main class="crm-shell">
+    <div class="crm-stats">
+      <div class="crm-stat">
+        <div class="crm-stat-label">Total customers</div>
+        <div class="crm-stat-value" id="crm-stat-total">0</div>
+      </div>
+      <div class="crm-stat">
+        <div class="crm-stat-label">Active pipeline</div>
+        <div class="crm-stat-value" id="crm-stat-active">0</div>
+      </div>
+      <div class="crm-stat">
+        <div class="crm-stat-label">Pipeline value</div>
+        <div class="crm-stat-value crm-stat-value--sm" id="crm-stat-pipeline">₹0</div>
+      </div>
+      <div class="crm-stat">
+        <div class="crm-stat-label">Revenue this month</div>
+        <div class="crm-stat-value crm-stat-value--sm" id="crm-stat-revenue">₹0</div>
+      </div>
+      <div class="crm-stat">
+        <div class="crm-stat-label">Completed orders</div>
+        <div class="crm-stat-value" id="crm-stat-completed">0</div>
+      </div>
+      <div class="crm-stat crm-stat--alert">
+        <div class="crm-stat-label">Follow-ups due</div>
+        <div class="crm-stat-value" id="crm-stat-followup">0</div>
+      </div>
+    </div>
+
+    <div class="crm-toolbar">
+      <div class="crm-view-tabs" role="tablist">
+        <button type="button" class="crm-view-tab is-active" data-view="table" role="tab">Table</button>
+        <button type="button" class="crm-view-tab" data-view="pipeline" role="tab">Pipeline</button>
+        <button type="button" class="crm-view-tab" data-view="insights" role="tab">Insights</button>
+      </div>
+      <input type="search" class="crm-search" id="crm-search" placeholder="Search customers…" />
+      <select class="crm-filter" id="crm-filter">
+        <option value="">All statuses</option>
+        <option value="new">New lead</option>
+        <option value="quoted">Quoted</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="completed">Completed</option>
+        <option value="lost">Lost</option>
+      </select>
+      <select class="crm-filter" id="crm-quick-filter">
+        <option value="">Quick filters</option>
+        <option value="overdue">Overdue follow-ups</option>
+        <option value="week">Due this week</option>
+        <option value="high">High value (₹2000+)</option>
+        <option value="priority">High priority</option>
+      </select>
+      <select class="crm-filter" id="crm-sort">
+        <option value="updated">Sort: Recently updated</option>
+        <option value="followup">Sort: Follow-up date</option>
+        <option value="value">Sort: Order value</option>
+        <option value="name">Sort: Name A–Z</option>
+      </select>
+    </div>
+
+    <div class="crm-view crm-view--table is-active" id="crm-view-table">
+      <div class="crm-table-wrap">
+        <table class="crm-table">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Source</th>
+              <th>Occasion</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Follow-up</th>
+              <th>Value</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="crm-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="crm-view crm-view--pipeline" id="crm-view-pipeline" hidden>
+      <div class="crm-kanban" id="crm-kanban"></div>
+    </div>
+
+    <div class="crm-view crm-view--insights" id="crm-view-insights" hidden>
+      <div class="crm-insights-grid">
+        <section class="crm-insight-card">
+          <h3>Sales funnel</h3>
+          <div class="crm-funnel" id="crm-funnel"></div>
+        </section>
+        <section class="crm-insight-card">
+          <h3>Lead sources</h3>
+          <div class="crm-sources" id="crm-sources"></div>
+        </section>
+        <section class="crm-insight-card">
+          <h3>Top occasions</h3>
+          <div class="crm-bars" id="crm-occasions"></div>
+        </section>
+        <section class="crm-insight-card">
+          <h3>Due for follow-up</h3>
+          <ul class="crm-follow-list" id="crm-follow-list"></ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit / Add modal -->
+  <div class="crm-modal-backdrop" id="crm-modal" role="dialog" aria-modal="true" aria-labelledby="crm-modal-title">
+    <div class="crm-modal">
+      <div class="crm-modal-header">
+        <h2 id="crm-modal-title">Add customer</h2>
+        <button type="button" class="crm-modal-close" id="crm-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <form id="crm-form">
+        <div class="crm-field">
+          <label for="crm-name">Name *</label>
+          <input type="text" id="crm-name" required placeholder="Customer name" />
+        </div>
+        <div class="crm-row-2">
+          <div class="crm-field">
+            <label for="crm-phone">Phone / WhatsApp</label>
+            <input type="tel" id="crm-phone" placeholder="+91 …" />
+          </div>
+          <div class="crm-field">
+            <label for="crm-email">Email</label>
+            <input type="email" id="crm-email" placeholder="optional" />
+          </div>
+        </div>
+        <div class="crm-field">
+          <label for="crm-address">Address / area</label>
+          <input type="text" id="crm-address" placeholder="Kota, Rajasthan" />
+        </div>
+        <div class="crm-row-2">
+          <div class="crm-field">
+            <label for="crm-source">Lead source</label>
+            <select id="crm-source">
+              <option value="">Not set</option>
+              <option>WhatsApp</option>
+              <option>Instagram</option>
+              <option>Website</option>
+              <option>Referral</option>
+              <option>Walk-in</option>
+              <option>Google</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="crm-field">
+            <label for="crm-priority">Priority</label>
+            <select id="crm-priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+        <div class="crm-row-2">
+          <div class="crm-field">
+            <label for="crm-occasion">Occasion</label>
+            <select id="crm-occasion"></select>
+          </div>
+          <div class="crm-field">
+            <label for="crm-status">Status</label>
+            <select id="crm-status">
+              <option value="new">New lead</option>
+              <option value="quoted">Quoted</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="completed">Completed</option>
+              <option value="lost">Lost</option>
+            </select>
+          </div>
+        </div>
+        <div class="crm-row-2">
+          <div class="crm-field">
+            <label for="crm-order-value">Order value (₹)</label>
+            <input type="number" id="crm-order-value" min="0" step="1" placeholder="e.g. 1500" />
+          </div>
+          <div class="crm-field">
+            <label for="crm-follow-up">Follow-up date</label>
+            <input type="date" id="crm-follow-up" />
+          </div>
+        </div>
+        <div class="crm-field">
+          <label for="crm-tags">Tags (comma separated)</label>
+          <input type="text" id="crm-tags" placeholder="wedding, bulk, vip" />
+        </div>
+        <div class="crm-field">
+          <label for="crm-notes">Notes</label>
+          <textarea id="crm-notes" placeholder="Gift details, preferences…"></textarea>
+        </div>
+        <div class="crm-modal-actions">
+          <button type="button" class="crm-btn" id="crm-cancel">Cancel</button>
+          <button type="submit" class="crm-btn crm-btn--gold">Save customer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Customer detail drawer -->
+  <div class="crm-drawer-backdrop" id="crm-drawer" aria-hidden="true">
+    <aside class="crm-drawer" role="dialog" aria-labelledby="crm-drawer-name">
+      <div class="crm-drawer-header">
+        <div>
+          <h2 id="crm-drawer-name">Customer</h2>
+          <p class="crm-drawer-sub" id="crm-drawer-meta"></p>
+        </div>
+        <button type="button" class="crm-modal-close" id="crm-drawer-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="crm-drawer-actions" id="crm-drawer-actions"></div>
+      <div class="crm-drawer-body">
+        <div class="crm-drawer-section">
+          <h3>Details</h3>
+          <dl class="crm-dl" id="crm-drawer-details"></dl>
+        </div>
+        <div class="crm-drawer-section">
+          <h3>Log activity</h3>
+          <form id="crm-activity-form" class="crm-activity-form">
+            <select id="crm-activity-type">
+              <option value="note">Note</option>
+              <option value="whatsapp">WhatsApp</option>
+              <option value="call">Phone call</option>
+              <option value="invoice">Invoice sent</option>
+              <option value="meeting">Meeting / visit</option>
+            </select>
+            <input type="text" id="crm-activity-text" placeholder="What happened?" required />
+            <button type="submit" class="crm-btn crm-btn--gold">Add</button>
+          </form>
+        </div>
+        <div class="crm-drawer-section">
+          <h3>Activity timeline</h3>
+          <ul class="crm-timeline" id="crm-drawer-timeline"></ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="crm-toast" id="crm-toast" role="status" aria-live="polite"></div>
+
+  <script src="crm.js" defer></script>
+</body>
+</html>

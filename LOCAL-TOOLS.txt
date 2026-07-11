@@ -1,0 +1,18 @@
+Whishess internal tools — bookmark these:
+
+  Stats:   https://whishess.in/stats.html   ← visit counter dashboard
+  CRM:     https://whishess.in/crm.html
+  Invoice: https://whishess.in/invoice.html
+
+Visit counter files:
+  visit-counter.js       (on all public pages)
+  stats.html, stats.css, stats.js
+  netlify/functions/visits.js
+  netlify.toml
+
+How it works:
+  - Every time someone opens whishess.in (any page), it counts once per browser session.
+  - Works from Instagram, WhatsApp, Google, direct links — anywhere.
+  - View totals at whishess.in/stats.html (private, not on Google).
+
+Deploy: upload the FULL folder to Netlify (must include netlify/ folder).

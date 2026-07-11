@@ -1,0 +1,305 @@
+/* Shared nav + footer for legal pages */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #1A1220;
+  color: #FAFAFA;
+  min-height: 100vh;
+}
+
+.wf-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2.5rem;
+  border-bottom: 0.5px solid rgba(201, 169, 110, 0.2);
+}
+
+.wf-logo {
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: #C9A96E;
+}
+
+.wf-logo span { font-style: italic; color: #F2D9D0; }
+
+.wf-nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.wf-nav-links a {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 250, 0.6);
+  text-decoration: none;
+}
+
+.wf-nav-links a.active,
+.wf-nav-links a:hover { color: #C9A96E; }
+
+.wf-nav-menu { display: flex; align-items: center; gap: 2rem; }
+
+.wf-nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.wf-nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: #C9A96E;
+  transition: transform 0.25s, opacity 0.2s;
+}
+
+.wf-nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.wf-nav-toggle.open span:nth-child(2) { opacity: 0; }
+.wf-nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Footer */
+.wf-footer {
+  padding: 2rem 2.5rem;
+  border-top: 0.5px solid rgba(201, 169, 110, 0.1);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.wf-footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: #C9A96E;
+  letter-spacing: 0.1em;
+}
+
+.wf-footer-title {
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 250, 0.45);
+  margin-bottom: 0.75rem;
+}
+
+.wf-footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wf-footer-links a {
+  text-decoration: none;
+  color: rgba(250, 250, 250, 0.7);
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.wf-footer-links a:hover { color: #F2D9D0; }
+
+.wf-footer-links li {
+  color: rgba(250, 250, 250, 0.7);
+  font-size: 14px;
+}
+
+.wf-footer-note {
+  color: rgba(250, 250, 250, 0.55);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.wf-footer-copy {
+  font-size: 12px;
+  color: rgba(250, 250, 250, 0.3);
+  letter-spacing: 0.04em;
+  margin-top: 0.7rem;
+}
+
+.wf-footer-brand-col .wf-footer-title--follow {
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+}
+
+.wf-footer-brand-col .wf-social-links {
+  margin-top: 0.75rem;
+}
+
+.wf-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.wf-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0.5px solid rgba(201, 169, 110, 0.35);
+  border-radius: 50%;
+  color: #C9A96E;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.wf-social-link:hover {
+  background: #C9A96E;
+  color: #1A1220;
+  border-color: #C9A96E;
+  transform: translateY(-2px);
+}
+
+.wf-social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.wf-site-credit {
+  padding: 1.9rem 1.5rem 2.1rem;
+  text-align: center;
+  border-top: 0.5px solid rgba(201, 169, 110, 0.12);
+}
+
+.wf-site-credit span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 250, 0.4);
+}
+
+.wf-site-credit a {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  color: #C9A96E;
+  text-decoration: none;
+}
+
+.wf-site-credit a:hover { color: #F2D9D0; }
+
+.wf-site-credit .wf-line {
+  width: 26px;
+  height: 0.5px;
+  display: inline-block;
+}
+
+.wf-site-credit .wf-line--left {
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.6));
+}
+
+.wf-site-credit .wf-line--right {
+  background: linear-gradient(90deg, rgba(201, 169, 110, 0.6), transparent);
+}
+
+/* WhatsApp float */
+.wf-whatsapp-float {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  background: #25D366;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.wf-whatsapp-float:hover {
+  transform: translateY(-3px);
+  background: #1fb85a;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+}
+
+.wf-whatsapp-float svg {
+  position: relative;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  fill: #ffffff;
+  flex-shrink: 0;
+  display: block;
+}
+
+.wf-whatsapp-float::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  border-radius: 50%;
+  animation: wf-whatsapp-ping 2s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes wf-whatsapp-ping {
+  0% { transform: scale(0.85); opacity: 0.9; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+@media (max-width: 1100px) {
+  .wf-footer { grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+}
+
+@media (max-width: 680px) {
+  .wf-footer { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+@media (max-width: 860px) {
+  .wf-nav { flex-wrap: wrap; position: relative; }
+  .wf-nav-toggle { display: flex; }
+  .wf-nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1rem;
+    width: 100%;
+    padding: 1.25rem 0 0.4rem;
+  }
+  .wf-nav-menu.open { display: flex; }
+  .wf-nav-links { flex-direction: column; gap: 1.1rem; width: 100%; }
+}
+
+@media (max-width: 680px) {
+  .wf-whatsapp-float {
+    right: 0.9rem;
+    bottom: 0.9rem;
+    width: 54px;
+    height: 54px;
+  }
+  .wf-whatsapp-float svg { width: 28px; height: 28px; }
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Whishess Invoice Generator</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="invoice.css" />
+</head>
+<body>
+
+  <header class="inv-topbar">
+    <div class="inv-topbar-brand">
+      <a href="index.html" class="inv-topbar-logo-link" aria-label="Back to Whishess website">
+        <img src="apple-touch-icon.png" alt="" class="inv-topbar-logo" width="44" height="44" />
+      </a>
+      <div>
+        <h1>whish<span>ess</span> Invoice</h1>
+        <p>Premium gift wrapping · Kota · <a href="index.html" class="inv-site-link">whishess.in</a></p>
+      </div>
+    </div>
+    <div class="inv-actions">
+      <a href="stats.html" class="inv-btn">Stats</a>
+      <a href="crm.html" class="inv-btn">CRM</a>
+      <button type="button" class="inv-btn" id="inv-add-item">+ Add item</button>
+      <button type="button" class="inv-btn" id="inv-save-draft">Save draft</button>
+      <button type="button" class="inv-btn" id="inv-clear">Clear</button>
+      <button type="button" class="inv-btn" id="inv-new">New invoice</button>
+      <button type="button" class="inv-btn inv-btn--gold" id="inv-print">Print / PDF</button>
+    </div>
+  </header>
+
+  <div class="inv-layout">
+  <aside class="inv-editor">
+
+    <section class="inv-section">
+      <h2 class="inv-section-title">Invoice details</h2>
+      <div class="inv-row-2">
+        <div class="inv-field">
+          <label for="inv-no">Invoice no.</label>
+          <input type="text" id="inv-no" />
+        </div>
+        <div class="inv-field">
+          <label for="inv-status">Payment status</label>
+          <select id="inv-status">
+            <option value="unpaid">Unpaid</option>
+            <option value="partial">Partial payment</option>
+            <option value="paid">Paid in full</option>
+          </select>
+        </div>
+      </div>
+      <div class="inv-row-2">
+        <div class="inv-field">
+          <label for="inv-date">Invoice date</label>
+          <input type="date" id="inv-date" />
+        </div>
+        <div class="inv-field">
+          <label for="inv-due">Due date</label>
+          <input type="date" id="inv-due" />
+        </div>
+      </div>
+    </section>
+
+    <section class="inv-section inv-payment-section">
+      <h2 class="inv-section-title">Payment received</h2>
+      <div class="inv-field">
+        <label for="inv-amount-paid">Amount received (₹)</label>
+        <input type="number" id="inv-amount-paid" min="0" step="1" value="0" />
+      </div>
+      <div class="inv-pay-quick">
+        <span class="inv-pay-quick-label">Quick set</span>
+        <div class="inv-pay-quick-btns">
+          <button type="button" class="inv-chip" data-pay-pct="25">25%</button>
+          <button type="button" class="inv-chip" data-pay-pct="50">50%</button>
+          <button type="button" class="inv-chip" data-pay-pct="75">75%</button>
+          <button type="button" class="inv-chip inv-chip--gold" data-pay-pct="100">Full</button>
+        </div>
+      </div>
+      <div class="inv-payment-summary">
+        <div class="inv-total-line">Total: <span id="inv-editor-total">₹0</span></div>
+        <div class="inv-total-line">Received: <span id="inv-editor-paid">₹0</span></div>
+        <div class="inv-total-line inv-total-line--balance">Balance due: <span id="inv-editor-balance">₹0</span></div>
+        <div class="inv-pay-bar" aria-hidden="true"><span id="inv-editor-pay-bar"></span></div>
+      </div>
+    </section>
+
+    <section class="inv-section">
+      <h2 class="inv-section-title">Customer</h2>
+      <div class="inv-field">
+        <label for="inv-customer-name">Name</label>
+        <input type="text" id="inv-customer-name" placeholder="Customer name" />
+      </div>
+      <div class="inv-field">
+        <label for="inv-customer-phone">Phone</label>
+        <input type="tel" id="inv-customer-phone" placeholder="+91 …" />
+      </div>
+      <div class="inv-field">
+        <label for="inv-customer-address">Address / notes</label>
+        <textarea id="inv-customer-address" placeholder="Area in Kota, event name, etc."></textarea>
+      </div>
+    </section>
+
+    <section class="inv-section">
+      <h2 class="inv-section-title">Line items</h2>
+      <p class="inv-presets-label">Quick add services</p>
+      <div class="inv-presets" id="inv-presets"></div>
+      <div class="inv-items-editor" id="inv-items-editor"></div>
+    </section>
+
+    <section class="inv-section inv-totals-editor">
+      <div class="inv-row-2">
+        <div class="inv-field">
+          <label for="inv-discount">Discount (%)</label>
+          <input type="number" id="inv-discount" min="0" max="100" step="1" value="0" />
+        </div>
+        <div class="inv-field inv-field--checkbox">
+          <label><input type="checkbox" id="inv-gst" /> Add 18% GST</label>
+        </div>
+      </div>
+      <div class="inv-total-line">Subtotal: <span id="inv-editor-subtotal">₹0</span></div>
+    </section>
+
+    <section class="inv-section">
+      <div class="inv-field">
+        <label for="inv-signature-name">Signature name</label>
+        <input type="text" id="inv-signature-name" placeholder="e.g. Whishess Team" value="Whishess" />
+      </div>
+      <div class="inv-field">
+        <label for="inv-notes">Notes</label>
+        <textarea id="inv-notes" placeholder="Payment terms, UPI ID, thank you message…">Thank you for choosing Whishess. Payment via UPI / cash accepted.</textarea>
+      </div>
+    </section>
+
+  </aside>
+
+  <main class="inv-preview-wrap">
+    <article class="inv-invoice" id="inv-preview">
+      <div class="inv-invoice-accent"></div>
+
+      <header class="inv-invoice-header">
+        <div class="inv-brand-block">
+          <img src="apple-touch-icon.png" alt="Whishess" class="inv-brand-logo" width="72" height="72" />
+          <div>
+            <div class="inv-brand-name">whish<span>ess</span></div>
+            <div class="inv-brand-tag">Premium Gift Wrapping · Kota, Rajasthan</div>
+            <div class="inv-brand-contact">
+              WhatsApp: +91 95716 28921<br />
+              hello@whishess.in · whishess.in
+            </div>
+          </div>
+        </div>
+        <div class="inv-invoice-meta">
+          <div class="inv-meta-title">Invoice</div>
+          <div class="inv-meta-grid">
+            <div class="inv-meta-cell">
+              <span class="inv-meta-label">No.</span>
+              <span class="inv-meta-value" id="inv-preview-no">—</span>
+            </div>
+            <div class="inv-meta-cell">
+              <span class="inv-meta-label">Date</span>
+              <span class="inv-meta-value" id="inv-preview-date">—</span>
+            </div>
+            <div class="inv-meta-cell">
+              <span class="inv-meta-label">Due</span>
+              <span class="inv-meta-value" id="inv-preview-due">—</span>
+            </div>
+            <div class="inv-meta-cell inv-meta-cell--status">
+              <span class="inv-meta-label">Status</span>
+              <span class="inv-status inv-status--pending" id="inv-preview-status">Unpaid</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="inv-bill-to">
+        <h3>Bill to</h3>
+        <p id="inv-preview-customer"><span class="inv-muted">Customer details</span></p>
+      </section>
+
+      <table class="inv-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Qty</th>
+            <th>Rate</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="inv-preview-items"></tbody>
+      </table>
+
+      <div class="inv-bottom-grid">
+        <div class="inv-payment-card" id="inv-preview-payment-card">
+          <h4>Payment summary</h4>
+          <div class="inv-payment-card-row">
+            <span>Amount received</span>
+            <strong id="inv-preview-paid">₹0</strong>
+          </div>
+          <div class="inv-payment-card-row inv-payment-card-row--balance">
+            <span>Balance due</span>
+            <strong id="inv-preview-balance">₹0</strong>
+          </div>
+          <div class="inv-pay-bar inv-pay-bar--light" aria-hidden="true"><span id="inv-preview-pay-bar"></span></div>
+          <p class="inv-payment-note" id="inv-preview-payment-note"></p>
+        </div>
+
+        <div class="inv-summary">
+          <div class="inv-summary-row"><span>Subtotal</span><span id="inv-preview-subtotal">₹0</span></div>
+          <div class="inv-summary-row"><span>Discount</span><span id="inv-preview-discount">₹0</span></div>
+          <div class="inv-summary-row" id="inv-preview-gst-row" hidden><span>GST (18%)</span><span id="inv-preview-gst">₹0</span></div>
+          <div class="inv-summary-row inv-summary-row--total"><span>Total</span><span id="inv-preview-total">₹0</span></div>
+        </div>
+      </div>
+
+      <div class="inv-notes" id="inv-preview-notes-block" hidden>
+        <strong>Notes</strong>
+        <span id="inv-preview-notes"></span>
+      </div>
+
+      <div class="inv-signature-block">
+        <div class="inv-signature">
+          <div class="inv-signature-line"></div>
+          <p class="inv-signature-label">Authorized Signature</p>
+          <p class="inv-signature-name" id="inv-preview-signature">Whishess</p>
+        </div>
+      </div>
+
+      <p class="inv-footer-msg">Every gift deserves a <em>beautiful</em> first impression.</p>
+    </article>
+  </main>
+  </div>
+
+  <script src="invoicePresets.js" defer></script>
+  <script src="invoice.js" defer></script>
+</body>
+</html>
