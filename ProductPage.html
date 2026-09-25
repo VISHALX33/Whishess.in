@@ -1,0 +1,455 @@
+<section class="whishess-product-page">
+  <div class="product-container">
+
+    <!-- LEFT: Product Images -->
+    <div class="product-gallery">
+
+      <div class="main-product-image">
+        <img
+          id="mainProductImage"
+          src="/images/plant-pot-1.jpeg"
+          alt="Jute Wall Hanging Plant Pot"
+        />
+
+        <span class="price-badge">₹200</span>
+      </div>
+
+      <div class="thumbnail-container">
+        <button onclick="changeImage('/images/plant-pot-1.jpeg')">
+          <img src="/images/plant-pot-1.jpeg" alt="Product view 1">
+        </button>
+
+        <button onclick="changeImage('/images/plant-pot-2.jpeg')">
+          <img src="/images/plant-pot-2.jpeg" alt="Product view 2">
+        </button>
+
+        <button onclick="changeImage('/images/plant-pot-3.jpeg')">
+          <img src="/images/plant-pot-3.jpeg" alt="Product view 3">
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT: Product Details -->
+    <div class="product-details">
+
+      <span class="product-label">WHISSESS HOME DECOR</span>
+
+      <h1>Jute Wall Hanging Plant Pot</h1>
+
+      <p class="product-short-description">
+        Bring greenery and elegance to your walls with this beautiful
+        handmade jute wall hanging plant pot.
+      </p>
+
+      <div class="product-price">
+        <span class="current-price">₹200</span>
+        <span class="old-price">₹299</span>
+        <span class="offer">SPECIAL PRICE</span>
+      </div>
+
+
+      <div class="product-features">
+
+        <div class="feature">
+          <div class="feature-icon">🌿</div>
+          <div>
+            <h3>Beautiful Design</h3>
+            <p>Perfect combination of jute, flowers and greenery.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">✨</div>
+          <div>
+            <h3>Elegant Decoration</h3>
+            <p>Add a beautiful decorative touch to your walls.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🏠</div>
+          <div>
+            <h3>Perfect For Any Space</h3>
+            <p>Ideal for home, office, balcony, cafe and more.</p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- ORDER -->
+      <div class="order-box">
+
+        <h2>Order Now</h2>
+
+        <p>
+          Get this beautiful wall hanging plant pot for only
+          <strong>₹200</strong>.
+        </p>
+
+        <a
+          href="https://wa.me/917852010994?text=Hello%20Whishess,%20I%20want%20to%20order%20the%20Jute%20Wall%20Hanging%20Plant%20Pot%20for%20₹200."
+          target="_blank"
+          class="whatsapp-button"
+        >
+          <span>💬</span>
+          Order on WhatsApp
+        </a>
+
+        <a
+          href="https://whishess.in"
+          class="website-button"
+        >
+          Order from Whishess.in
+        </a>
+
+        <p class="contact-number">
+          WhatsApp: <strong>78520 10994</strong>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+
+.whishess-product-page {
+  width: 100%;
+  padding: 70px 20px;
+  background: #faf9f4;
+  font-family: Arial, sans-serif;
+}
+
+.product-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+
+/* =========================
+   PRODUCT GALLERY
+========================= */
+
+.product-gallery {
+  width: 100%;
+}
+
+.main-product-image {
+  position: relative;
+  width: 100%;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.10);
+}
+
+.main-product-image img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.price-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 85px;
+  height: 85px;
+
+  background: #28551f;
+  color: white;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 23px;
+  font-weight: 800;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.20);
+}
+
+
+.thumbnail-container {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.thumbnail-container button {
+  border: 2px solid transparent;
+  padding: 0;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.thumbnail-container button:hover {
+  border-color: #28551f;
+}
+
+.thumbnail-container img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* =========================
+   PRODUCT DETAILS
+========================= */
+
+.product-details {
+  padding: 10px;
+}
+
+.product-label {
+  color: #47783d;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.product-details h1 {
+  margin: 12px 0;
+
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.1;
+
+  color: #263d21;
+}
+
+.product-short-description {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #666;
+  max-width: 560px;
+}
+
+
+/* PRICE */
+
+.product-price {
+  margin: 25px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.current-price {
+  font-size: 40px;
+  font-weight: 800;
+  color: #28551f;
+}
+
+.old-price {
+  font-size: 20px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.offer {
+  padding: 7px 12px;
+  background: #e6f0df;
+  color: #28551f;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 20px;
+}
+
+
+/* FEATURES */
+
+.product-features {
+  margin: 25px 0;
+}
+
+.feature {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.feature-icon {
+  min-width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background: #e6f0df;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+}
+
+.feature h3 {
+  margin: 0 0 5px;
+  color: #263d21;
+  font-size: 17px;
+}
+
+.feature p {
+  margin: 0;
+  color: #777;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   ORDER BOX
+========================= */
+
+.order-box {
+  margin-top: 30px;
+
+  padding: 25px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.order-box h2 {
+  margin: 0 0 8px;
+  color: #263d21;
+}
+
+.order-box p {
+  color: #666;
+  line-height: 1.5;
+}
+
+
+/* WHATSAPP */
+
+.whatsapp-button {
+  width: 100%;
+
+  margin-top: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 15px;
+
+  border-radius: 12px;
+
+  background: #25D366;
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  transition: 0.2s;
+}
+
+.whatsapp-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37,211,102,0.25);
+}
+
+
+/* WEBSITE BUTTON */
+
+.website-button {
+  width: 100%;
+
+  margin-top: 10px;
+
+  display: block;
+
+  padding: 15px;
+
+  border-radius: 12px;
+
+  background: #28551f;
+  color: white;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+.website-button:hover {
+  background: #1e4218;
+}
+
+.contact-number {
+  text-align: center;
+  margin-top: 15px !important;
+  font-size: 14px !important;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+  .whishess-product-page {
+    padding: 35px 15px;
+  }
+
+  .product-container {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .product-details h1 {
+    font-size: 36px;
+  }
+
+  .current-price {
+    font-size: 34px;
+  }
+
+  .thumbnail-container img {
+    width: 75px;
+    height: 75px;
+  }
+
+}
+
+</style>
+
+
+<script>
+
+function changeImage(image) {
+  document.getElementById("mainProductImage").src = image;
+}
+
+</script>

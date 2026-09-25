@@ -296,8 +296,8 @@ body {
 .wf-hero {
   position: relative;
   isolation: isolate;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 3.5rem;
 }
 .wf-hero::after {
   content: '';
@@ -1291,7 +1291,7 @@ select.wf-input,
   }
 }
 @media (max-width: 640px) {
-  .wf-hero { padding-top: 3rem; padding-bottom: 3rem; }
+  .wf-hero { padding-top: 1.25rem; padding-bottom: 2.5rem; }
   .wf-faq-list { padding: 0 1.1rem; }
   .wf-cursor-glow { display: none; }
   .wf-video-section {

@@ -9,8 +9,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="stats.css" />
+  <link rel="stylesheet" href="auth-gate.css" />
 </head>
 <body>
+
+  <div class="wh-auth-overlay" id="wh-auth-overlay">
+    <div class="wh-auth-card">
+      <h2 class="wh-auth-title">Admin sign in</h2>
+      <p class="wh-auth-sub">Enter your admin credentials to continue.</p>
+      <form id="wh-auth-form" novalidate>
+        <div class="wh-auth-field">
+          <label for="wh-auth-email">Email</label>
+          <input type="email" id="wh-auth-email" autocomplete="username" required />
+        </div>
+        <div class="wh-auth-field">
+          <label for="wh-auth-password">Password</label>
+          <input type="password" id="wh-auth-password" autocomplete="current-password" required />
+        </div>
+        <p class="wh-auth-error" id="wh-auth-error"></p>
+        <button type="submit" class="wh-auth-submit">Sign in</button>
+      </form>
+    </div>
+  </div>
 
   <header class="st-topbar">
     <div>
@@ -77,6 +97,7 @@
     </div>
   </main>
 
+  <script src="auth-gate.js" defer></script>
   <script src="stats.js" defer></script>
 </body>
 </html>
